@@ -7,31 +7,49 @@
 
                 <form class="col-12"  method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
+
+
+
                   <div class="form-group">
                     <label for="formGroupExampleInput">Name</label>
                     {{form.name}}
                   </div>
                   <div class="form-group">
+                    <label for="lgFormGroupInput" class="col-sm-2 col-form-label">Upload Image</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="file" name="uploadedImage" class="file" style="display: none">
+                            
+                             <!-- {{form.uploadedImage}} -->
+
+                            <span class="input-group-btn">
+                                <button class="browse btn btn-info input-lg" type="button">Browse &hellip;</button>
+                            </span>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+                            <input type="text" class="form-control input-lg" readonly="" placeholder="Upload Image">
+                        </div>
+                    </div>
+                  </div>
+                  <!-- <div class="form-group">
                     <label for="formGroupExampleInput2">Upload Image</label>
                     {{form.uploadedImage}}
-                  </div>
+                  </div> -->
                   <button type="submit" class="btn btn-primary btn-block">Upload</button>
                 </form>   
               </div>
 
+
 {% endblock %}
 
-<div class="container h-100">
-        <div class="row h-100 justify-content-center align-items-center">
-          <form class="col-12">
-            <div class="form-group">
-              <label for="formGroupExampleInput">Example label</label>
-              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
-            </div>
-            <div class="form-group">
-              <label for="formGroupExampleInput2">Another label</label>
-              <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
-            </div>
-          </form>   
-        </div>
-      </div>
+
+{% block scripts %}
+<script>
+  $(document).on('click', '.browse', function(){
+      var file = $(this).parent().parent().find('.file');
+      file.trigger('click');
+  });
+  $(document).on('change','.file', function(){
+      $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
+  });
+</script>
+{%endblock %}
