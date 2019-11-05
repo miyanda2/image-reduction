@@ -1,10 +1,55 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h3>Image Compression</h3>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">Upload</button>
-</form>
+        
+        <div class="row h-100 justify-content-center align-items-center mx-auto mr-5">
+                <h3>Image Compression</h3>
+
+                <form class="col-12"  method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+
+
+                  <div class="form-group">
+                    <label for="formGroupExampleInput">Name</label>
+                    {{form.name}}
+                  </div>
+                  <div class="form-group">
+                    <label for="lgFormGroupInput" class="col-sm-2 col-form-label">Upload Image</label>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="file" name="uploadedImage" class="file" style="display: none">
+                            
+                             <!-- {{form.uploadedImage}} -->
+
+                            <span class="input-group-btn">
+                                <button class="browse btn btn-info input-lg" type="button">Browse &hellip;</button>
+                            </span>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+                            <input type="text" class="form-control input-lg" readonly="" placeholder="Upload Image">
+                        </div>
+                    </div>
+                  </div>
+                  <!-- <div class="form-group">
+                    <label for="formGroupExampleInput2">Upload Image</label>
+                    {{form.uploadedImage}}
+                  </div> -->
+                  <button type="submit" class="btn btn-primary btn-block">Upload</button>
+                </form>   
+              </div>
+
+
 {% endblock %}
+
+
+{% block scripts %}
+<script>
+  $(document).on('click', '.browse', function(){
+      var file = $(this).parent().parent().find('.file');
+      file.trigger('click');
+  });
+  $(document).on('change','.file', function(){
+      $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
+  });
+</script>
+{%endblock %}
