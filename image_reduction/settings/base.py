@@ -15,7 +15,7 @@ SECRET_KEY = 'ixpti-1!*mjx+j!7xyninxh(na1rf%_qq*ynlkv7by^(@e*@!e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -29,7 +29,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #local app
-    'compression'
+    'compression',
+
+    #third party apps
+    'whitenoise.runserver_nostatic',
+
 
 ]
 
@@ -41,6 +45,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+        # whitestatic
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
+
 ]
 
 ROOT_URLCONF = 'image_reduction.urls'
@@ -141,4 +149,6 @@ MESSAGE_TAGS = {
 STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static'), ]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # new!
