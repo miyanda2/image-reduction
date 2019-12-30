@@ -23,3 +23,13 @@ class Upload(models.Model):
         outputIoStream.seek(0)
         uploadedImage = InMemoryUploadedFile(outputIoStream,'ImageField', "%s.jpg" % uploadedImage.name.split('.')[0], 'image/jpeg', sys.getsizeof(outputIoStream), None)
         return uploadedImage
+    
+
+    # def get_absolute_url(self):
+    #     return reverse("students_profile:student_profile_detail", args=[self.id])
+    
+    
+
+
+
+# 

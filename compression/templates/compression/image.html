@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-4 mt-3 mr-auto ml-auto">
+    <img width="400" src="{{image.uploadedImage.url}}" class="img-fluid" alt="Responsive image">
+    <h3 class="mt-2">Name Of Image: {{image.name}}</h3>
+
+</div>
+{% endblock %}
